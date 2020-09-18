@@ -3,7 +3,7 @@ from flask import Flask
 from config import Config
 
 from src.route.api import api
-from src.route.cms import cms
+from src.route.site import site
 
 
 def create_app():
@@ -12,6 +12,6 @@ def create_app():
     app.config.from_object(Config)
 
     app.register_blueprint(api)
-    app.register_blueprint(cms)
+    app.register_blueprint(site)
 
     return app
