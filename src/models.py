@@ -14,6 +14,9 @@ class TourGroups(Base):
                        server_default=func.now(), comment="建立時間")
     deletedAt = Column(DateTime, nullable=True, comment="刪除時間")
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     def __repr__(self):
         return "<TourGroups: {}, {}, {}, {}>".format(self.id, self.name, self.createdAt, self.place)
 
@@ -24,7 +27,9 @@ class Tags(Base):
     name = Column(String(50), nullable=False, unique=True, comment="標籤名")
     createdAt = Column(DateTime, nullable=False,
                        server_default=func.now(), comment="建立時間")
-    
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
         return "<Tags: {}, {}>".format(self.id, self.name)
@@ -37,6 +42,9 @@ class Price(Base):
     startDate = Column(Date, nullable=False, comment="出發日期")
     createdAt = Column(DateTime, nullable=False,
                        server_default=func.now(), comment="建立時間")
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
         return "<Price: {}, {}>".format(self.id, self.groupId, self.startDate)
